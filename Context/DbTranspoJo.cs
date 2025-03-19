@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using TranspoJo.Models;
 
 namespace TranspoJo.Context
 {
@@ -7,9 +8,19 @@ namespace TranspoJo.Context
     {
         public DbTranspoJo(DbContextOptions<DbTranspoJo> option) : base(option) { }
 
+
+        public DbSet<Coordinate> Coordinates { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-        
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Coordinate>(entity =>
+            {
+                entity.ToTable("Coordinate");
+
+            });
         }
     }
 }
+
+  
