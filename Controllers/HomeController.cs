@@ -17,7 +17,26 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    public IActionResult home()
+    {
+        return View();
+    }
+    public IActionResult login()
+    {
+        return View();
+    }
+    public IActionResult pick()
+    {
+        return View();
+    }
+    public IActionResult Destination()
+    {
+        return View();
+    }
+    public IActionResult root()
+    {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();

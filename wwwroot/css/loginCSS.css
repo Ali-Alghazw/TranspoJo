@@ -1,0 +1,131 @@
+﻿body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #2c0b2c, #ff6600);
+    padding: 20px;
+}
+
+.login-container {
+    width: 120%;
+    max-width: 1200px;
+    min-height: 600px;
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.left-panel {
+    flex: 1;
+    background-color: black;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 75px;
+    max-width: 250px;
+    height: auto;
+}
+
+.logo-text {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+    .footer a {
+        color: #ff6600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .footer a:hover {
+            color: #cc5200;
+        }
+
+.right-panel {
+    flex: 1;
+    padding: 60px 40px;
+    background: url(../image/login-page-photo.jpg) center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 2px solid #ff6600;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-label {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+    .form-control:focus {
+        border-color: #ff6600;
+        box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
+        background: #fff;
+    }
+
+.btn-custom {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+    .btn-custom:hover {
+        background-color: #cc5200;
+        transform: translateY(-1px);
+    }
+
+.highlight-text {
+    color: #ff6600;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+    .highlight-text:hover {
+        color: #cc5200;
+        text-decoration: none;
+    }
+
+.text-center {
+    color: white;
+}
