@@ -1,8 +1,212 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Transportation Routing</title>
+
+    <!-- Add Bootstrap for UI styling (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Find the Best Public Transportation Route</h1>
+
+        <div class="form-group">
+            <label for="destination">Enter Destination</label>
+            <input type="text" id="destination" class="form-control" placeholder="Search for destination" />
+        </div>
+
+        <button class="btn btn-primary" onclick="getRoute()">Find Route</button>
+
+        <div id="eta" style="margin-top: 10px; font-weight: bold;"></div>
+
+        <div id="map"></div>
+    </div>
+
+    <script>
+        let map, currentMarker, destinationMarker, transitPolyline;
+        let currentLocation = null;
+        let destinationLocation = null;
+        let nearbyStationMarkers = [];
+        let walkingPolylines = [];
+        let directionsService;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 31.9784, lng: 35.9042 },
+                zoom: 14
+            });
+
+            directionsService = new google.maps.DirectionsService();
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    currentLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+
+                    currentMarker = new google.maps.Marker({
+                        position: { lat: currentLocation.latitude, lng: currentLocation.longitude },
+                        map,
+                        label: "A",
+                        title: "Your Location"
+                    });
+
+                    map.setCenter(currentMarker.getPosition());
+                }, error => {
+                    alert("Geolocation error: " + error.message);
+                });
+            }
+
+            const input = document.getElementById("destination");
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const location = place.geometry.location;
+                    destinationLocation = {
+                        latitude: location.lat(),
+                        longitude: location.lng()
+                    };
+
+                    if (destinationMarker) destinationMarker.setMap(null);
+
+                    destinationMarker = new google.maps.Marker({
+                        position: location,
+                        map,
+                        label: "D",
+                        title: "Destination"
+                    });
+
+                    map.setCenter(location);
+                }
+            });
+        }
+
+        function getRoute() {
+            if (!currentLocation || !destinationLocation) {
+                alert("Please select both current location and destination.");
+                return;
+            }
+
+            clearMap();
+
+            fetch("http://localhost:5139/api/route/find-best", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    currentLocation,
+                    destination: destinationLocation
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data || !data.routePolyline || !data.nearbyStations) {
+                    alert("No valid route found.");
+                    return;
+                }
+
+                drawPolyline(data.routePolyline);
+                showNearbyStations(data.nearbyStations);
+                       showWalkingDirection(currentLocation, data.startStation.coordinates, "A → B");
+        showWalkingDirection(data.endStation.coordinates, destinationLocation, "C → D");
+
+                if (data.eta && data.distance) {
+                    document.getElementById("eta").innerText = `ETA: ${data.eta}, Distance: ${data.distance}`;
+                }
+            })
+            .catch(error => {
+                console.error("API error:", error);
+                alert("Failed to get route");
+            });
+        }
+
+        function clearMap() {
+            if (transitPolyline) transitPolyline.setMap(null);
+            walkingPolylines.forEach(p => p.setMap(null));
+            walkingPolylines = [];
+
+            nearbyStationMarkers.forEach(marker => marker.setMap(null));
+            nearbyStationMarkers = [];
+        }
+
+        function drawPolyline(points) {
+            const routePath = points.map(p => ({
+                lat: p.latitude,
+                lng: p.longitude
+            }));
+
+            transitPolyline = new google.maps.Polyline({
+                path: routePath,
+                geodesic: true,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 4
+            });
+
+            transitPolyline.setMap(map);
+        }
+
+        function showNearbyStations(stations) {
+            stations.forEach(station => {
+                const marker = new google.maps.Marker({
+                    position: {
+                        lat: station.coordinates.latitude,
+                        lng: station.coordinates.longitude
+                    },
+                    map,
+                    icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    title: station.name
+                });
+
+                nearbyStationMarkers.push(marker);
+            });
+        }
+
+        function showWalkingDirection(start, end, label) {
+            directionsService.route({
+                origin: { lat: start.latitude, lng: start.longitude },
+                destination: { lat: end.latitude, lng: end.longitude },
+                travelMode: google.maps.TravelMode.WALKING
+            }, (result, status) => {
+                if (status === "OK") {
+                    const line = new google.maps.Polyline({
+                        path: result.routes[0].overview_path,
+                        strokeColor: "#0000FF",
+                        strokeOpacity: 0.7,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                    walkingPolylines.push(line);
+                } else {
+                    console.warn("Walking directions failed:", status);
+                }
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbLyZgSVr4OCN-UPn_Aa5YOSi8OgZjZ70&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>
