@@ -1,8 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+@model TranspoJo.Models.Coordinate
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transpo.jo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/css/rootcss.css" rel="stylesheet" />
+	<link href="~/css/routecss.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <img src="./image/Logo-Photoroom.png" alt="Transpo.Jo Logo" height="50">
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Log in</a></li>
-            <li class="nav-item"><a class="btn btn-light" href="#">Sign up →</a></li>
-        </ul>
-    </nav>
     <div class="container mt-5">
         <div class="hero-section row align-items-center">
             <div class="col-md-6">
                 <h1>Go anywhere with Transpo.jo</h1>
                 <div class="form-group mt-4">
-                    <input type="text" class="form-control mb-3" placeholder="Pick location">
-                    <input type="text" class="form-control mb-3" placeholder="Destination">
+                    <form asp-action="SubmitForm" method="post">
+
+						<input asp-for="Latitude" type="text" class="form-control mb-3" placeholder="Pick location">
+						<input asp-for ="Longitude" type="text" class="form-control mb-3" placeholder="Destination">
+
+                     <button class="next-btn" type="submit">Show me the Route</button>
+
+					</form>  
+               
                 </div>
-                <button class="next-btn"> Show me the root</button>
+                
             </div>
             <div class="col-md-6">
                 <img src="~/images/screenshot 2025-03-12 064939.png" alt="Travel Image" class="img-fluid">

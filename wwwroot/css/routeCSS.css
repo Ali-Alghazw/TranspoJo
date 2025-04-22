@@ -29,11 +29,11 @@ h1 {
     transition: all 0.3s ease;
 }
 
-    .form-control:focus {
+.form-control:focus {
         border-color: #ff6600;
         box-shadow: 0 0 8px rgba(255, 102, 0, 0.6);
         background: #fff;
-    }
+}
 
 .next-btn {
     margin-left: 170px;

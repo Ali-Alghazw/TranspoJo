@@ -29,20 +29,32 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult route()
+    {
+        return View();
+    }
     public IActionResult Destination()
     {
         return View();
     }
-    public IActionResult root()
-    {
-        return View();
-    }
+    
     public IActionResult Privacy()
     {
         return View();
     }
+	[HttpPost]
+	public IActionResult SubmitForm(Coordinate model)
+	{
+		return RedirectToAction("Destination", model);
+	}
+	[HttpGet]
+	public IActionResult Destination(Coordinate model)
+	{
+		return View(model);
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	}
+
+	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

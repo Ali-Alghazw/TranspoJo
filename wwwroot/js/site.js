@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function getLatLong() {
+    var Lat = document.getElementById("Latitude").value;
+    var Long = document.getElementById("Longitude").value;
+    PrintLatLong(Lat, Long);
+}
 
-// Write your JavaScript code.
+
+function PrintLatLong(value1, value2) {
+    document.getElementById("output").innerText = "you entered " + value1 + " , " + value2 + ".";
+}
+
