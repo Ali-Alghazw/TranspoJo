@@ -39,25 +39,6 @@
     font-size: 1.5rem;
 }
 
-.footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    color: #fff;
-    font-size: 0.9rem;
-    margin-top: auto;
-}
-
-    .footer a {
-        color: #ff6600;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-        .footer a:hover {
-            color: #cc5200;
-        }
 
 .right-panel {
     flex: 1;

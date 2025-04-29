@@ -3,21 +3,19 @@
     background: linear-gradient(to right, #2c0b2c, #6f3107);
 }
 
-.navbar {
-    background-color: #1a0e1b;
-    padding: 15px 0;
-    padding-left: 50px;
-    padding-right: 50px;
-}
 .hero-section {
     margin-top: 147px;
     margin-bottom: 110px;
 }
 
 h1 {
-    margin-bottom: 50px;
     color: white;
-    font-size: 4.5rem;
+    font-size: 2.5rem;
+}
+
+.result {
+    justify-content:center;
+    margin-top:auto
 }
 
 .form-control {
@@ -51,23 +49,4 @@ h1 {
         transform: scale(1.05);
     }
 
-.footer {
-    padding-top: 15px;
-    height: 55px;
-    background-color: #2a1b2f;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    color: #fff;
-}
 
-    .footer a {
-        color: #ff6600;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-        .footer a:hover {
-            color: #cc5200;
-        }

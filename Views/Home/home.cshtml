@@ -12,27 +12,12 @@
     <link href="~/css/homecss.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark"> 
-        <img src="~/images/Logo-photoroom.png" alt="Transpojo"/>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Log in</a></li>
-            <li class="nav-item"><a class="btn btn-light" href="#">Sign up →</a></li>
-        </ul>
-    </nav>
     <header class="hero-section ">
         <div class="container text-center text-white">
             <h1>Where Are We Going ?</h1>
             <p>Everything you need to know about transportation, here in Jordan</p>
-            <a class="btn btn-light btn-lg" href="#">Let’s Ride</a>
+            <a asp-controller="Home" asp-action="pick" class="btn btn-light btn-lg" >Let’s Ride</a>
         </div>
     </header>
-
-    <footer class="footer">
-        <p class="Rights">&copy; Transpo.Jo. All Rights Reserved 2025</p>
-        <p>|</p>
-        <p class="Terms"><a href=".......">Terms & Conditions</a></p>
-    </footer>
 </body>
 </html>
