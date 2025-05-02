@@ -17,6 +17,20 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult Private()
+    {
+        return View();
+    }
+    public IActionResult RentalCar()
+    {
+        return View();
+    }
+
+    public IActionResult RentalCarStatic()
+    {
+        return View();
+    }
     public IActionResult home()
     {
         return View();
