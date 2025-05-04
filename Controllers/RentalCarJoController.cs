@@ -2,9 +2,14 @@
 
 namespace TranspoJo.Controllers
 {
-    public class RentalCarController : Controller
+    public class RentalCarJoController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Dynamic()
         {
             return View();
         }

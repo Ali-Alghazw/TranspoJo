@@ -18,55 +18,13 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Private()
+    public IActionResult Pick()
     {
         return View();
     }
-    public IActionResult RentalCar()
-    {
-        return View();
-    }
-
-    public IActionResult RentalCarStatic()
-    {
-        return View();
-    }
-    public IActionResult home()
-    {
-        return View();
-    }
-    public IActionResult login()
-    {
-        return View();
-    }
-    public IActionResult pick()
-    {
-        return View();
-    }
-    public IActionResult route()
-    {
-        return View();
-    }
-    public IActionResult Destination()
-    {
-        return View();
-    }
+  
     
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-	[HttpPost]
-	public IActionResult SubmitForm(Coordinate model)
-	{
-		return RedirectToAction("Destination", model);
-	}
-	[HttpGet]
-	public IActionResult Destination(Coordinate model)
-	{
-		return View(model);
-
-	}
+ 
 
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

@@ -2,7 +2,7 @@
 
 namespace TranspoJo.Controllers
 {
-    public class PrivateTranspController : Controller
+    public class PublicTranspoJoController : Controller
     {
         public IActionResult Index()
         {

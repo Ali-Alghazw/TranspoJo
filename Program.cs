@@ -1,10 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using TranspoJo.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DbTranspoJo>(options =>
-   options.UseSqlServer(builder.Configuration.GetConnectionString("DbTranspoJo")));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -27,6 +25,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=pick}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
