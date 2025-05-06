@@ -2,21 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - TranspoJo</title>
-    <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TranspoJo.styles.css" asp-append-version="true" />
+
     <style>
-        .footer {
-            height: 55px;
-            background-color: #2a1b2f;
-            width: 100%;
+        body {
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            flex-direction: column;
+            min-height: 200vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .footer {
+            background-color: #2a1b2f;
             color: #fff;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 0.95rem;
         }
 
             .footer a {
@@ -28,49 +37,57 @@
                     color: #cc5200;
                 }
 
+        .navbar-brand img {
+            max-height: 100px;
+        }
+
+        @@media (max-width: 768px) {
+            .footer{
+            flex-direction: column;
+            font-size: 0.9rem;
+        }
+
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1a0e1b;">
             <div class="container-fluid">
-                <a asp-controller="Home" asp-action="home" class="navbar-brand ms-2">
-                    <img src="~/images/logo-photoroom.png" alt="Transpo.Jo Logo" height="55" />
+                <a asp-controller="Home" asp-action="home" class="navbar-brand">
+                    <img src="~/images/logo-photoroom.png" alt="Transpo.Jo Logo" width="70px" height="70px" />
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
+                        <!-- Add more nav items here -->
                     </ul>
                 </div>
             </div>
         </nav>
-
-
-
     </header>
- 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+
+    <main role="main" class="container py-4">
+        @RenderBody()
+    </main>
+
     <footer class="footer">
-        <p class="Rights">&copy; Transpo.Jo. All Rights Reserved 2025</p>
-        <p>|</p>
-        <p class="Terms"><a href=".......">Terms & Conditions</a></p>
+        <div class="container d-flex flex-wrap justify-content-center gap-2">
+            <span>&copy; Transpo.Jo. All Rights Reserved 2025</span>
+            <span>|</span>
+            <a href="#">Terms & Conditions</a>
+        </div>
     </footer>
 
-
-    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\RentalCar\" />
+    <Folder Include="Views\PrivateTransp\" />
+  </ItemGroup>
+
 </Project>

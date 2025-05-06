@@ -4,8 +4,27 @@
     font-family: Arial, sans-serif;
 }
 
+.hero-section {
+    background-image: url('../images/home.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 400px;
+    align-items: center;
+    text-align: center;
+}
 
+    .hero-section1 h {
+        font-size: 90;
+        font-weight: bold;
+    }
 
+    .hero-section p {
+        font-size: 1.25rem;
+    }
+
+/*
 .hero-section {
     height: 230px;
     display: flex;
@@ -22,7 +41,7 @@
 .container {
     text-align: left;
 }
-
+*/
 .transport-card {
     background: rgba(255, 255, 255, 0.1);
     color: white;
@@ -40,4 +59,3 @@
         height: 200px;
         object-fit: cover;
     }
-
