@@ -11,14 +11,19 @@
     background-attachment: fixed;
     background-size: cover;
     height: 400px;
+    display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
+    flex-direction: column;
 }
 
-    .hero-section1 h {
-        font-size: 90;
+
+    .hero-section h1 {
+        font-size: 3.5rem;
         font-weight: bold;
     }
+
 
     .hero-section p {
         font-size: 1.25rem;
