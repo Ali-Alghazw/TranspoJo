@@ -12,20 +12,18 @@
         <div class="container text-center text-white">
             <h1>Where Are We Going ?</h1>
             <p>Everything you need to know about transportation, here in Jordan</p>
-            <a asp-controller="Home" asp-action="pick" class="btn btn-light btn-lg">Let’s Ride</a>
-        </div>
-    </header>
-    <header class="hero-section">
-        <div class="container text-white">
-            <h1>Choose your way to travel around:</h1>
+            <a href="#travel-options" class="btn btn-light btn-lg">Let’s Ride</a>
         </div>
     </header>
 
     <section class="container text-center my-5">
-        <div class="row mt-4">
+        <div id="travel-options" class="row mt-4">
+        <div class="container text-white">
+            <h1>Choose your way to travel around:</h1>
+        </div>
             <div class="col-md-4">
                 <div class="card transport-card">
-                    <img src="~/images/electricbuslahore1.jpg" class="card-img-top" alt="Public Transport">
+                    <img src="~/images/electricbuslahore.jpg" class="card-img-top" alt="Public Transport">
                     <div class="card-body">
                         <h5 class="card-title">Public Transportation</h5>
                         <a asp-controller="PublicTranspoJo" asp-action="Index" class="btn btn-primary d-block mb-2">Explore</a>
