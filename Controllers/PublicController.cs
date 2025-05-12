@@ -2,9 +2,9 @@
 
 namespace TranspoJo.Controllers
 {
-    public class PrivateTranspoJoController : Controller
+    public class PublicController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Public()
         {
             return View();
         }

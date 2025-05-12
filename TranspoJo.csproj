@@ -7,17 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\PrivateTransp\**" />
+    <Content Remove="Views\PrivateTransp\**" />
+    <EmbeddedResource Remove="Views\PrivateTransp\**" />
+    <None Remove="Views\PrivateTransp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\RentalCar\" />
-    <Folder Include="Views\PrivateTransp\" />
   </ItemGroup>
 
 </Project>

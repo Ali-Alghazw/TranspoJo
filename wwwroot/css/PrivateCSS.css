@@ -1,0 +1,46 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #2c0b2c, #6f3107);
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.info-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.step-info {
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+}
+
+.highlight-cost {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.highlight-distance {
+    color: #0d6efd;
+}
+
+.custom-btn {
+    font-size: 1.1rem;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.trip-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
