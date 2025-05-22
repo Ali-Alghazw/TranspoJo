@@ -261,7 +261,6 @@
 </body>
 </html>
  *@
-
 @{
     ViewBag.Title = "Transpo Jo - Public Bus Route";
 }
@@ -282,7 +281,7 @@
         <div class="row mb-4">
             <div class="col-md-6 offset-md-3">
                 <input type="text" id="destination" class="form-control form-control-lg" placeholder="Enter destination" />
-                <button class="btn btn-primary w-100 custom-btn mt-3" onclick="getBusRoute()">🚌 Show Bus Route</button>
+                <button id="route-button" class="btn btn-primary w-100 custom-btn mt-3" onclick="handleRouteButtonClick()">🚌 Show Bus Route</button>
             </div>
         </div>
 
@@ -293,17 +292,19 @@
                     <div id="steps-info"></div>
                     <hr />
                     <p class="mb-1"><strong>Total Distance:</strong> <span class="highlight-distance" id="total-distance">0 km</span></p>
-                    <p><strong>Total Cost:</strong> <span class="highlight-cost" id="total-cost">0</span> JD</p>
+                    <p><strong>Total Cost:</strong> <span class="highlight-cost" id="total-cost">0 JD</span></p>
                 </div>
             </div>
         </div>
 
-        <div id="map" class="mt-5"></div>
+        <div id="map" class="mt-5" style="height: 500px;"></div>
     </div>
 
     <script>
         let map, currentLocation, destinationLocation, currentMarker, destinationMarker;
         let directionsService;
+        let routePolyline = null;
+        let routeShown = false;
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -350,6 +351,14 @@
             });
         }
 
+        function handleRouteButtonClick() {
+            if (!routeShown) {
+                getBusRoute();
+            } else {
+                resetRoute();
+            }
+        }
+
         async function getBusRoute() {
             if (!currentLocation || !destinationLocation) {
                 alert("Please select both your location and destination.");
@@ -371,20 +380,46 @@
 
                 if (!data || !data.tripSummaryText) {
                     document.getElementById("steps-info").innerHTML =
-                        `<div class="step-info text-danger">❌ No bus route found.</div>`;
+                        '<div class="step-info text-danger">❌ No bus route found.</div>';
                     return;
                 }
 
-                drawPolyline(data.routePolyline, "#007bff");
+                routePolyline = drawPolyline(data.routePolyline, "#007bff");
 
                 document.getElementById("steps-info").innerHTML =
                     `<div class="step-info">${data.tripSummaryText.replace(/\n/g, "<br/>")}</div>`;
                 document.getElementById("total-distance").innerText = `${data.totalDistance} km`;
                 document.getElementById("total-cost").innerText = `${data.totalCost} JD`;
+
+                document.getElementById("route-button").innerText = "🔄 Reset";
+                routeShown = true;
+
             } catch (err) {
                 console.error("Error fetching route:", err);
                 alert("An error occurred while calculating the route.");
             }
+        }
+
+        function resetRoute() {
+            if (routePolyline) {
+                routePolyline.setMap(null);
+                routePolyline = null;
+            }
+
+            if (destinationMarker) {
+                destinationMarker.setMap(null);
+                destinationMarker = null;
+            }
+
+            destinationLocation = null;
+
+            document.getElementById("destination").value = "";
+            document.getElementById("steps-info").innerHTML = "";
+            document.getElementById("total-distance").innerText = "0 km";
+            document.getElementById("total-cost").innerText = "0 JD";
+
+            document.getElementById("route-button").innerText = "🚌 Show Bus Route";
+            routeShown = false;
         }
 
         function drawPolyline(points, color) {
@@ -397,6 +432,7 @@
                 strokeWeight: 5
             });
             polyline.setMap(map);
+            return polyline;
         }
     </script>
 </body>

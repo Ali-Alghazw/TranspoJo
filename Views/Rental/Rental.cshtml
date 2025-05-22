@@ -5,11 +5,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbLyZgSVr4OCN-UPn_Aa5YOSi8OgZjZ70&callback=initMap" async defer></script>
     <link href="~/css/rentalcss.css" rel="stylesheet" />
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .rental-entry {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -22,7 +38,7 @@
                 <div class="info-box">
                     <h4>Rental Places Near You:</h4>
                     <div id="rental-list">Click the button to load nearby rental places.</div>
-                    <button id="load-rentals-btn" class="btn btn-primary mt-3 w-100" onclick="loadNearbyRentalPlacesFromButton()">🔍 Load Nearby Rentals</button>
+                    <button id="toggle-btn" class="btn btn-primary mt-3 w-100" onclick="toggleLoadReset()">🔍 Load Nearby Rentals</button>
                 </div>
             </div>
         </div>
@@ -32,6 +48,7 @@
         let map;
         let currentMarker;
         let rentalMarkers = [];
+        let isLoaded = false;  // Tracks if rentals are currently loaded
 
         async function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -40,7 +57,7 @@
             });
 
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (pos) => {
+                navigator.geolocation.getCurrentPosition((pos) => {
                     const lat = pos.coords.latitude;
                     const lon = pos.coords.longitude;
 
@@ -61,10 +78,10 @@
             }
         }
 
-        async function loadNearbyRentalPlacesFromButton() {
+        async function loadNearbyRentalPlaces() {
             if (!currentMarker) {
                 alert("Unable to get your location. Please try again.");
-                return;
+                return false;
             }
 
             const lat = currentMarker.getPosition().lat();
@@ -80,8 +97,12 @@
 
                 if (rentals.length === 0) {
                     listContainer.innerHTML = "<p>No rental places found nearby.</p>";
-                    return;
+                    return true;
                 }
+
+                // Clear any existing rental markers first
+                rentalMarkers.forEach(marker => marker.setMap(null));
+                rentalMarkers = [];
 
                 rentals.forEach(r => {
                     const { name, address, rating, coordinates } = r;
@@ -105,9 +126,45 @@
                     rentalMarkers.push(marker);
                 });
 
+                return true;
             } catch (err) {
                 console.error("Error loading rentals:", err);
                 document.getElementById("rental-list").innerHTML = "<p class='text-danger'>Failed to load rental places.</p>";
+                return false;
+            }
+        }
+
+        function resetRentalView() {
+            // Remove all rental markers from map
+            rentalMarkers.forEach(marker => marker.setMap(null));
+            rentalMarkers = [];
+
+            // Clear rental list content
+            document.getElementById("rental-list").innerHTML = "Click the button to load nearby rental places.";
+
+            // Reset map center to current location if available
+            if (currentMarker) {
+                map.setCenter(currentMarker.getPosition());
+                map.setZoom(13);
+            }
+        }
+
+        async function toggleLoadReset() {
+            const btn = document.getElementById("toggle-btn");
+            if (!isLoaded) {
+                const success = await loadNearbyRentalPlaces();
+                if (success) {
+                    btn.textContent = "🔄 Reset";
+                    btn.classList.remove("btn-primary");
+                    btn.classList.add("btn-secondary");
+                    isLoaded = true;
+                }
+            } else {
+                resetRentalView();
+                btn.textContent = "🔍 Load Nearby Rentals";
+                btn.classList.remove("btn-secondary");
+                btn.classList.add("btn-primary");
+                isLoaded = false;
             }
         }
     </script>
