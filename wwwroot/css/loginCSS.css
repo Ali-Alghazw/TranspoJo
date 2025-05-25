@@ -33,6 +33,33 @@
     max-width: 250px;
     height: auto;
 }
+.admin-login-title {
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 6px rgba(255, 102, 0, 0.8);
+}
+.home-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ff6600;
+    border: 2px solid #ff6600;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+    .home-link:hover {
+        background-color: #ff6600;
+        color: #fff;
+    }
+
+
 
 .logo-text {
     color: #fff;
@@ -43,7 +70,7 @@
 .right-panel {
     flex: 1;
     padding: 60px 40px;
-    background: url(../image/login-page-photo.jpg) center/cover;
+    background: url('../images/logo.png') center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;

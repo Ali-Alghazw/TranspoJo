@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TranspoJo.DTOs.BusStationDto>
+@{
+    ViewData["Title"] = "Bus Stations";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Bus Stations</h2>
+        <a class="btn btn-primary" asp-action="Create">+ Add Bus Station</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No bus stations found.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th style="width:110px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var station in Model)
+                {
+                    <tr>
+                        <td>@station.Id</td>
+                        <td>@station.Name</td>
+                        <td>@station.Coordinates?.Latitude</td>
+                        <td>@station.Coordinates?.Longitude</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@station.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

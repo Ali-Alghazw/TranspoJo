@@ -1,0 +1,11 @@
+﻿@using TranspoJo.DTOs
+@model AdminDashboardDto
+
+<div class="container mt-5">
+    <h2>Admin Dashboard</h2>
+
+    <div class="card my-3 p-3">
+        <h4>Bus Stations: @Model.BusStationCount</h4>
+        <h4>Rental Places: @Model.RentalPlaceCount</h4>
+    </div>
+</div>

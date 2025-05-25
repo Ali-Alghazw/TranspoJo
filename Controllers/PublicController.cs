@@ -4,7 +4,7 @@ namespace TranspoJo.Controllers
 {
     public class PublicController : Controller
     {
-        public IActionResult Public()
+        public IActionResult Index()
         {
             return View();
         }

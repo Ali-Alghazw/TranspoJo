@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TranspoJo.DTOs.RentalPlaceDTO>
+@{
+    ViewData["Title"] = "Rental Places";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Rental Places</h2>
+        <a class="btn btn-primary" asp-action="Create">+ Add Rental Place</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No rental places available.</div>
+    }
+    else
+    {
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Rating</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th style="width:100px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var place in Model)
+                {
+                    <tr>
+                        <td>@place.Name</td>
+                        <td>@place.Address</td>
+                        <td>@place.Rating</td>
+                        <td>@place.Coordinates?.Latitude</td>
+                        <td>@place.Coordinates?.Longitude</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@place.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
