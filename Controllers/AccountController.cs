@@ -50,8 +50,8 @@ namespace TranspoJo.Controllers
 
             // If admin → sign in
             var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Name, loginResult.Email),
+               {
+            new Claim(ClaimTypes.Name, loginResult.Email),
         new Claim(ClaimTypes.Role, "Admin")
     };
 
