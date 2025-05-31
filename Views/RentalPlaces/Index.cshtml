@@ -2,10 +2,15 @@
 @{
     ViewData["Title"] = "Rental Places";
 }
-
+<style>
+    body {
+        background: linear-gradient(to right, #2c0b2c, #6f3107);
+    }
+</style>
+<body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Rental Places</h2>
+            <h2 style="color:white">Rental Places</h2>
         <a class="btn btn-primary" asp-action="Create">+ Add Rental Place</a>
     </div>
 
@@ -44,3 +49,4 @@
         </table>
     }
 </div>
+</body>

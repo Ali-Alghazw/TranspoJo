@@ -9,96 +9,8 @@
     var stationCounts = Model.StationStart.Select(s => s.StartRoutesCount).ToList();
 }
 
-<style>
-    .card {
-        border-radius: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        height: 150px;
-        background: #fff;
-    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-            filter: brightness(1.05);
-        }
-
-    .card-body {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
-        color: #333;
-    }
-
-    .card-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        transition: color 0.3s ease;
-        color: #333;
-    }
-
-    .card-text {
-        font-size: 1.1rem;
-        color: #555;
-    }
-
-    .card-icon {
-        font-size: 2.5rem;
-        color: #007bff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 20px;
-        transition: color 0.3s ease;
-    }
-
-    .card:hover .card-icon {
-        color: #0056b3;
-    }
-
-    .card-title a {
-        text-decoration: none;
-        transition: color 0.3s ease;
-        color: #007bff;
-    }
-
-        .card-title a:hover {
-            color: #0056b3;
-        }
-
-    .container {
-        max-width: 1200px;
-        margin-top: 20px;
-    }
-
-    .card-icon i {
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover .card-icon i {
-        transform: scale(1.1);
-    }
-
-    .h1 {
-        font-size: 2.0rem;
-        font-weight: 700;
-        color: #007bff;
-        text-align: center;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 6px 16px rgba(0, 123, 255, 0.3);
-        background-color: white;
-        margin-bottom: 2rem;
-    }
-</style>
-
+<link href="~/css/dashboard.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="container">
@@ -140,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="container mt-4">
+<div class="container mt-4" style="background-color:white">
     <h5>Routes Starting from Each Bus Station</h5>
     <canvas id="routesChart" width="400" height="200"></canvas>
 </div>
@@ -156,8 +68,8 @@
             datasets: [{
                 label: 'Starting Routes Count',
                 data: data,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(255, 102, 0, 1)',
+                borderColor: 'rgba(255, 102, 0, 1)',
                 borderWidth: 1
             }]
         },
