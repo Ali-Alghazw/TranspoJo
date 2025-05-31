@@ -4,8 +4,6 @@
     {
         public int BusStationCount { get; set; }
         public int RentalPlaceCount { get; set; }
-   
-      public List<StationStartDto> StationStart { get; set; }
-       
+        public List<StationStartDto> StationStart { get; set; } = new();
     }
 }

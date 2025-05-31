@@ -1,42 +1,54 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllersWithViews();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Configure authentication with cookie scheme
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login";
-        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.LoginPath = "/Account/Login";          // Redirect here if not authenticated
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Redirect here if user lacks role/permission
     });
 
+// Add authorization services
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
+
+// Add HttpClient factory for API calls
 builder.Services.AddHttpClient();
+
+// Add session support (needed for your token storage)
+builder.Services.AddSession();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure middleware pipeline
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseDeveloperExceptionPage(); // in development mode
+else
+{
+    app.UseDeveloperExceptionPage();
+}
 
-//test test test 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
+// Session middleware before authentication
+app.UseSession();
+
+// Enable authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Pick}/{id?}");

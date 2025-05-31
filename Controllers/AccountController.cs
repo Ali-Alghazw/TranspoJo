@@ -48,10 +48,13 @@ namespace TranspoJo.Controllers
                 return View(model);
             }
 
-            // If admin → sign in
+            // ✅ Store JWT token in session
+            HttpContext.Session.SetString("AuthToken", loginResult.Token);
+
+            // ✅ Sign in using cookie authentication
             var claims = new List<Claim>
-               {
-            new Claim(ClaimTypes.Name, loginResult.Email),
+    {
+        new Claim(ClaimTypes.Name, loginResult.Email),
         new Claim(ClaimTypes.Role, "Admin")
     };
 
@@ -62,6 +65,7 @@ namespace TranspoJo.Controllers
 
             return RedirectToAction("Dashboard", "Admin");
         }
+
 
         public async Task<IActionResult> Logout()
         {
