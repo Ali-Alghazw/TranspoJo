@@ -2,9 +2,14 @@
 @{
     ViewData["Title"] = "Add Bus Station";
 }
-
+<style>
+    body {
+        background: linear-gradient(to right, #2c0b2c, #6f3107);
+    }
+</style>
+<body>
 <div class="container mt-5">
-    <h2 class="mb-4">Add Bus Station</h2>
+        <h2 class="mb-4" style="color:white">Add Bus Station</h2>
     <form asp-action="Create" method="post" class="border p-4 rounded shadow-sm bg-light">
 
         <div class="mb-3">
@@ -29,3 +34,4 @@
         </div>
     </form>
 </div>
+</body>

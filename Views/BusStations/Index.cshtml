@@ -2,10 +2,15 @@
 @{
     ViewData["Title"] = "Bus Stations";
 }
-
+<style>
+    body {
+        background: linear-gradient(to right, #2c0b2c, #6f3107);
+    }
+</style>
+<body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Bus Stations</h2>
+        <h2 style="color:white">Bus Stations</h2>
         <a class="btn btn-primary" asp-action="Create">+ Add Bus Station</a>
     </div>
 
@@ -15,7 +20,7 @@
     }
     else
     {
-        <table class="table table-striped table-bordered shadow-sm">
+        <table class="table table-striped table-bordered shadow-sm ">
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
@@ -42,3 +47,4 @@
         </table>
     }
 </div>
+</body>

@@ -54,11 +54,10 @@
     text-decoration: none;
 }
 
-    .home-link:hover {
-        background-color: #ff6600;
-        color: #fff;
-    }
-
+.home-link:hover {
+    background-color: #ff6600;
+    color: #fff;
+}
 
 
 .logo-text {
@@ -66,11 +65,10 @@
     font-size: 1.5rem;
 }
 
-
 .right-panel {
     flex: 1;
     padding: 60px 40px;
-    background: url('../images/logo.png') center/cover;
+    background: url('../images/login.png') center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
