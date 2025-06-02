@@ -1,5 +1,9 @@
-html {
-  font-size: 14px;
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {

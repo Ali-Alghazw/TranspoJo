@@ -1,6 +1,7 @@
 ﻿body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #2c0b2c, #6f3107);
+    height: 100%;
 }
 #map {
     height: 500px;
